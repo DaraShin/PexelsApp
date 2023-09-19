@@ -8,10 +8,13 @@ import okhttp3.Response
 
 class InternetConnectionInterceptor(val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        if (!hasConnection()) {
-            throw NoConnectionException()
+        val request = chain.proceed(chain.request().newBuilder().build())
+        if(request.cacheResponse() == null){
+            if (!hasConnection()) {
+                throw NoConnectionException()
+            }
         }
-        return chain.proceed(chain.request().newBuilder().build())
+        return request
     }
 
     private fun hasConnection() : Boolean{

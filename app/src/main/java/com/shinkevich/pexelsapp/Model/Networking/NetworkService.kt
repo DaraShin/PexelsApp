@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
@@ -15,6 +16,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkService {
+
+    private val cacheSize: Long = 20 * 1024 * 1024
     private val apiKey = "9WzlvrESoWHNPtKLSMys6Xh3mLzV6ybqOrKiR54uH7mWo3EodN3w8T2k"
 
     @Singleton
@@ -28,7 +31,11 @@ class NetworkService {
                     .build()
                 chain.proceed(request)
             }
-        }.addInterceptor(InternetConnectionInterceptor(appContext)).build()
+        }
+            .cache(Cache(appContext.cacheDir, cacheSize))
+            .addInterceptor(NetworkCacheInterceptor(appContext))
+            .addInterceptor(InternetConnectionInterceptor(appContext))
+            .build()
     }
 
     @Provides

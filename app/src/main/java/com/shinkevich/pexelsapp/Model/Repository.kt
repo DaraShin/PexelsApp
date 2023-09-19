@@ -38,7 +38,11 @@ class Repository @Inject constructor(
                 for (photo in imageSearchResult.photos) {
                     resultImageList.add(Image(photo.id, photo.src.original, photo.photographer))
                 }
-                emit(RequestResult.Success(resultImageList as List<Image>))
+                if (response.raw().networkResponse() == null) {
+                    emit(RequestResult.SuccessFromCache(resultImageList as List<Image>))
+                } else {
+                    emit(RequestResult.Success(resultImageList as List<Image>))
+                }
             } else {
                 emit(RequestResult.Failure(context.getString(R.string.error_message)))
             }
@@ -60,7 +64,11 @@ class Repository @Inject constructor(
                 for (photo in imageSearchResponse.photos) {
                     popularImageList.add(Image(photo.id, photo.src.original, photo.photographer))
                 }
-                emit(RequestResult.Success(popularImageList as List<Image>))
+                if (response.raw().networkResponse() == null) {
+                    emit(RequestResult.SuccessFromCache(popularImageList as List<Image>))
+                } else {
+                    emit(RequestResult.Success(popularImageList as List<Image>))
+                }
             } else {
                 emit(RequestResult.Failure(context.getString(R.string.error_message)))
             }
@@ -82,7 +90,11 @@ class Repository @Inject constructor(
                 for (collection in featuredCollectionsResponse.collections) {
                     featuredCollections.add(collection.title)
                 }
-                emit(RequestResult.Success(featuredCollections as List<String>))
+                if (response.raw().networkResponse() == null) {
+                    emit(RequestResult.SuccessFromCache(featuredCollections as List<String>))
+                } else {
+                    emit(RequestResult.Success(featuredCollections as List<String>))
+                }
             } else {
                 emit(RequestResult.Failure(context.getString(R.string.error_message)))
             }
@@ -100,7 +112,27 @@ class Repository @Inject constructor(
             val response = pexelsApi.getPhotoById(photoId)
             if (response.isSuccessful) {
                 val photo = response.body()!!
-                emit(RequestResult.Success(Image(photo.id, photo.src.original, photo.photographer)))
+                if (response.raw().networkResponse() == null) {
+                    emit(
+                        RequestResult.SuccessFromCache(
+                            Image(
+                                photo.id,
+                                photo.src.original,
+                                photo.photographer
+                            )
+                        )
+                    )
+                } else {
+                    emit(
+                        RequestResult.Success(
+                            Image(
+                                photo.id,
+                                photo.src.original,
+                                photo.photographer
+                            )
+                        )
+                    )
+                }
             } else {
                 emit(RequestResult.Failure(context.getString(R.string.error_message)))
             }
@@ -129,7 +161,7 @@ class Repository @Inject constructor(
 
     fun saveImageToBookmarks(image: Image) {
         val bookmark = imageDao.getImageById(image.id)
-        if(bookmark != null){
+        if (bookmark != null) {
             return
         }
         val imageFilePath = saveImageFile(image)

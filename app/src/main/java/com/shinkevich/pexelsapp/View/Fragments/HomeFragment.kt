@@ -111,6 +111,9 @@ class HomeFragment : Fragment() {
         viewModel.featuredCollections.observe(viewLifecycleOwner) { featuredCollectionsResult ->
             when (featuredCollectionsResult) {
                 is RequestResult.Success -> {
+                    if(featuredCollectionsResult is RequestResult.SuccessFromCache){
+                        Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+                    }
                     val featuredCollections = featuredCollectionsResult.data!!
                     if (featuredCollections.isNotEmpty()) {
                         popularQueryListAdapter.setPopularQueryList(featuredCollections)
@@ -148,6 +151,9 @@ class HomeFragment : Fragment() {
         viewModel.imagesToShowResult.observe(viewLifecycleOwner) { imagesToShowResult ->
             when (imagesToShowResult) {
                 is RequestResult.Success -> {
+                    if(imagesToShowResult is RequestResult.SuccessFromCache){
+                        Toast.makeText(requireContext(), getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show()
+                    }
                     val imagesToShow = imagesToShowResult.data!!
                     if (imagesToShow.isNotEmpty()) {
                         imagesRecyclerView.visibility = View.VISIBLE
