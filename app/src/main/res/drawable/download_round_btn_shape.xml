@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/red"></solid>
+            <size android:height="@dimen/download_btn_height"
+                android:width="@dimen/download_btn_height" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/download_icon"
+        android:height="12dp"
+        android:width="12dp"
+        android:gravity="center"/>
+
+</layer-list>

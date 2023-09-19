@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="@dimen/elements_top_margin"
+    tools:context=".View.Fragments.HomeFragment">
+
+    <android.widget.SearchView
+        android:id="@+id/imageSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:background="@drawable/text_block_gray_shape"
+        android:closeIcon="@drawable/close_search_icon"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@drawable/text_block_gray_shape"
+        android:queryHint="@string/search_hint"
+        android:searchIcon="@drawable/search_icon"
+        android:theme="@style/SearchViewStyle" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/popularQueryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageSearchView"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:layout_marginTop="24dp"
+        tools:listitem="@layout/popular_query_item" />
+
+    <ProgressBar
+        android:id="@+id/searchImagesProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_below="@id/popularQueryRecyclerView"
+        android:background="@color/white"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/red"
+        android:paddingVertical="0dp"
+        android:progressTint="@color/red" />
+
+    <!--<androidx.fragment.app.FragmentContainerView
+        android:id="@+id/searchResultNavHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/popularQueryRecyclerView"
+        app:navGraph="@navigation/home_search_results_nav_graph" /> -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imagesRecyclerViewHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/popularQueryRecyclerView"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:layout_marginTop="24dp"
+        tools:listitem="@layout/image_item" />
+
+    <RelativeLayout
+        android:id="@+id/noNetworkStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/tryAgainImgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/no_network_icon" />
+
+        <TextView
+            android:id="@+id/tryAgainTextViewHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tryAgainImgView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="@string/try_again"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/noResultsStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="@dimen/screen_content_horizontal_margin"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/noResultsTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_results"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/exploreTextViewHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/noResultsTxtView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:text="@string/explore"
+            android:textAlignment="center"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

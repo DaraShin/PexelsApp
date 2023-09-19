@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/text_block_gray_shape"
+    android:layout_marginRight="10dp">
+
+    <TextView
+        android:id="@+id/popularQueryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
+        android:text="testText"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
+
+</FrameLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_content_horizontal_margin">24dp</dimen>
+    <dimen name="text_corner_radius">50dp</dimen>
+    <dimen name="image_corner_radius">20dp</dimen>
+    <dimen name="elements_top_margin">12dp</dimen>
+    <dimen name="image_spacing">16dp</dimen>
+    <dimen name="menu_icon_size">24dp</dimen>
+    <dimen name="download_btn_height">48dp</dimen>
+</resources>
