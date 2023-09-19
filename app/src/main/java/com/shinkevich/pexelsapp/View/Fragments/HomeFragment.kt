@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -36,12 +37,13 @@ class HomeFragment : Fragment() {
     private val sharedViewModel by activityViewModels<SharedViewModel>()
 
     private lateinit var progressBar: ProgressBar
-    private lateinit var navController: NavController
     private lateinit var noNetworkStub: View
     private lateinit var noResultsStub: View
     private lateinit var tryAgainTextView: TextView
     private lateinit var exploreTextView: TextView
     private lateinit var searchView: SearchView
+
+    private lateinit var navController: NavController
 
     private lateinit var imagesRecyclerView: RecyclerView
     private lateinit var imagesAdapter: ImagesRecyclerViewAdapter
@@ -74,9 +76,6 @@ class HomeFragment : Fragment() {
         searchView = requireView().findViewById(R.id.imageSearchView)
 
         navController = requireActivity().findNavController(R.id.navHostFragment)
-
-        //val navHostFragment = childFragmentManager.findFragmentById(R.id.searchResultNavHostFragment) as NavHostFragment
-        //navController = navHostFragment.navController
 
         imagesRecyclerView =
             requireView().findViewById(R.id.imagesRecyclerViewHome)

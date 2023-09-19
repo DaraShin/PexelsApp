@@ -6,10 +6,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PexelsApi {
-    @GET("search?per_page=10")
+    @GET("search?per_page=80")
     suspend fun searchImages(@Query("query") query : String) : Response<ImageSearchResponse>
 
-    @GET("curated?per_page=10")
+    @GET("curated?per_page=30")
     suspend fun getPopularImages() : Response<ImageSearchResponse>
 
     @GET("collections/featured?per_page=7")
@@ -17,5 +17,4 @@ interface PexelsApi {
 
     @GET("photos/{id}")
     suspend fun getPhotoById(@Path("id") photoId: Long): Response<Photo>
-
 }
