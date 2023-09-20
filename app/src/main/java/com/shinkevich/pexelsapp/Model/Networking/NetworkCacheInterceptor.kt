@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 class NetworkCacheInterceptor(val context: Context) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()
-        request = if (hasConnection()) {
+        request = if (hasConnection(context)) {
             request.newBuilder().header("Cache-Control", "public, max-age=" + 3600).build()
         } else {
             request.newBuilder()
@@ -20,10 +20,4 @@ class NetworkCacheInterceptor(val context: Context) : Interceptor {
         return chain.proceed(request)
     }
 
-    private fun hasConnection(): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connectivityManager.activeNetworkInfo
-        return networkInfo != null && networkInfo.isConnected
-    }
 }

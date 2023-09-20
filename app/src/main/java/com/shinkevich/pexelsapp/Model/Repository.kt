@@ -90,7 +90,8 @@ class Repository @Inject constructor(
                 for (collection in featuredCollectionsResponse.collections) {
                     featuredCollections.add(collection.title)
                 }
-                if (response.raw().networkResponse() == null) {
+
+                if (response.raw().networkResponse() == null ) {
                     emit(RequestResult.SuccessFromCache(featuredCollections as List<String>))
                 } else {
                     emit(RequestResult.Success(featuredCollections as List<String>))
